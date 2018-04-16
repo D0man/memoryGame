@@ -2,7 +2,7 @@ import '../css/app.scss'
 /*
  * Create a list that holds all of your cards
  */
-
+const cardList =['1','2','3','4','5','6','7','8']
 
 /*
  * Display the cards on the page
@@ -25,8 +25,15 @@ function shuffle(array) {
 
     return array;
 }
-
-
+const newCardList = shuffle(cardList);
+const cards = document.querySelectorAll('.card');
+for(const card of cards){
+    card.addEventListener('click',checkCard);
+    card.removeEventListener('click',checkCard);
+}
+function checkCard(card){
+    card.classList.add('match');
+}
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)

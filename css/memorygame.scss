@@ -1,0 +1,46 @@
+body{
+    background: #000;
+    color: #fff;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 16px;
+}
+.page__heading{
+    font-size:2em;
+    font-weight: bolder;
+    background:#1A1A1A;
+    padding:10px;
+    border-bottom: 1px solid #242424;
+
+    &--orange{
+        background:#FE980E;
+        color:#000;
+        padding:5px;
+        border-radius:5px;
+    }
+}
+.deck{
+    display: flex;
+    flex-wrap: wrap;
+    width:100%;
+    max-width: (258*4px)+24px; 
+    padding:10px;
+    margin:0 auto;
+    .card{
+        height: 145px;
+        width: 258px;
+        cursor: pointer;
+        background:white;
+        margin:3px;
+    }
+}
+.score-panel{
+    margin: 5px auto;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    width: 300px;
+    text-shadow: 0 0 black;
+    .stars{
+        display:flex;
+    }
+}
