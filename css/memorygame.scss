@@ -21,6 +21,7 @@ body{
 .deck{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     width:100%;
     max-width: (258*4px)+24px; 
     padding:10px;
