@@ -30,10 +30,7 @@ module.exports = {
         test: /\.(png|jpg|gif)$/,
         use: [
           {
-            loader: 'url-loader?name=/src/images/[name].[hash].[ext]',
-            options: {
-              limit: 8192
-            }
+            loader: 'url-loader?limit: 8192&name=img/[name].[hash].[ext]',
           }
         ]
       },

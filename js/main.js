@@ -75,8 +75,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /*
  * Create a list that holds all of your cards
  */
-const cardList = ['1', '2', '3', '4', '5', '6', '7', '8'];
-
+let cardList = ['sasha', 'riley', 'nicole', 'miamalkova', 'mia', 'madison', 'lana', 'johnny'];
+cardList = cardList.concat(cardList);
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -102,12 +102,29 @@ function shuffle(array) {
 }
 const newCardList = shuffle(cardList);
 const cards = document.querySelectorAll('.card');
-for (const card of cards) {
+cards.forEach(function letnameitlater(card, index) {
+    card.setAttribute("data-img", newCardList[index]);
     card.addEventListener('click', checkCard);
-    card.removeEventListener('click', checkCard);
-}
-function checkCard(card) {
-    card.classList.add('match');
+});
+
+function checkCard() {
+    this.style.background = `url("./img/${this.dataset.img}.jpg")`;
+    this.classList.add('matching');
+    let matchedCard = document.querySelectorAll('.matching');
+    // matchedCard.removeEventListener('click',checkCard);
+    if (matchedCard.length == 2) {
+        matchedCard[0].classList.remove('matching');
+        matchedCard[1].classList.remove('matching');
+        console.log('matching...');
+        if (matchedCard[0].dataset.img === matchedCard[1].dataset.img) {
+            let points = 1;
+        } else {
+            setTimeout(() => {
+                matchedCard[0].style.background = "#fff";
+                matchedCard[1].style.background = "#fff";
+            }, 1000);
+        }
+    }
 }
 /*
  * set up the event listener for a card. If a card is clicked:
