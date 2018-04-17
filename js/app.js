@@ -4,6 +4,8 @@ import '../css/app.scss'
  */
 let cardList =['sasha','riley','nicole','miamalkova','mia','madison','lana','johnny']
 cardList = cardList.concat(cardList);
+let counter = 0;
+let points = 0;
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -29,6 +31,7 @@ const newCardList = shuffle(cardList);
 const cards = document.querySelectorAll('.card');
 cards.forEach(function letnameitlater(card,index){
     card.setAttribute("data-img", newCardList[index]);
+    card.style.background="#fff";
     card.addEventListener('click', checkCard)
     
 });
@@ -37,22 +40,38 @@ function checkCard(){
     this.style.background=`url("./img/${this.dataset.img}.jpg")`;
     this.classList.add('matching');
     let matchedCard = document.querySelectorAll('.matching');
-    // matchedCard.removeEventListener('click',checkCard);
     if(matchedCard.length==2){
+        var blocker = document.createElement("div");        
+        blocker.classList.add("block-click");
+        console.log(blocker);                               
+        document.body.appendChild(blocker);              
         matchedCard[0].classList.remove('matching');
         matchedCard[1].classList.remove('matching');
         console.log('matching...')
         if(matchedCard[0].dataset.img===matchedCard[1].dataset.img){
-            let points=1;
+            points++;
+            matchedCard[0].removeEventListener('click',checkCard);
+            matchedCard[1].removeEventListener('click',checkCard);
+            document.body.removeChild(blocker);
+            if (points === 8) endGame();
         }
         else{
             setTimeout(()=>{
                 matchedCard[0].style.background="#fff";
                 matchedCard[1].style.background="#fff";
-            },1000)
-            
+                document.body.removeChild(blocker);
+            },1500)
         }
+        counter++;
+        document.querySelector('.moves').textContent=counter;
     }   
+}
+function endGame(){
+    var endGame = document.createElement("div");        
+    endGame.classList.add("block-click", "end-game");
+    var text = document.createTextNode(`Koniec: ${points} points`);
+    endGame.appendChild(text) 
+    document.body.appendChild(endGame);                      
 }
 /*
  * set up the event listener for a card. If a card is clicked:

@@ -22,9 +22,10 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: [
-          'babel-loader'
-        ]
+        use: {
+          loader:'babel-loader',
+          options: { presets: ['es2015'] }
+       },
       },
       {
         test: /\.(png|jpg|gif)$/,
