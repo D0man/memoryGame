@@ -29,12 +29,17 @@ function shuffle(array) {
 }
 const newCardList = shuffle(cardList);
 const cards = document.querySelectorAll('.card');
-cards.forEach(function letnameitlater(card,index){
-    card.setAttribute("data-img", newCardList[index]);
-    card.style.background="#fff";
-    card.addEventListener('click', checkCard)
+// cards.forEach(function letnameitlater(card,index){
+//     card.setAttribute("data-img", newCardList[index]);
+//     card.style.background="#fff";
+//     card.addEventListener('click', checkCard)
     
-});
+// });
+for ( const [index,card] of cards.entries()){
+    card.setAttribute("data-img", newCardList[index]);
+    card.style.background = "#fff";
+    card.addEventListener('click', checkCard);
+}
 
 function checkCard(){
     this.style.background=`url("./img/${this.dataset.img}.jpg")`;
