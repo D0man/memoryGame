@@ -75,7 +75,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 __webpack_require__(1);
 
 var startValue = 0;
-var endValue = 1;
+var endValue = 8;
 
 var cardList = ['sasha', 'riley', 'nicole', 'miamalkova', 'mia', 'madison', 'lana', 'johnny'];
 cardList = cardList.concat(cardList);
@@ -84,10 +84,13 @@ var moves = void 0,
     star = void 0,
     i = void 0,
     removedStar = void 0;
-
 var cards = document.querySelectorAll('.card');
 var restart = document.querySelector('.restart');
 var stars = document.querySelectorAll('.stars li');
+var cloneStar = [];
+for (i = 0; i < 3; i++) {
+    cloneStar[i] = stars[i].cloneNode(true);
+}
 var scorePanel = document.querySelector('.score-panel');
 var time = document.querySelector('.time');
 var movesDiv = document.querySelector('.moves');
@@ -101,7 +104,6 @@ startButton.addEventListener('click', function start() {
     setTimeout(function () {
         _this.parentElement.classList.add('hidden');
     }, 2000);
-
     startGame();
 });
 
@@ -162,17 +164,15 @@ function startGame() {
 }
 
 function reset() {
-    var cloneStar = stars[0].cloneNode(true);
-    var cloneStar1 = stars[0].cloneNode(true);
-    var cloneStar2 = stars[0].cloneNode(true);
-    moves = matched = star = i = removedStar = startValue;
+    moves = matched = star = i = startValue;
     time.textContent = i;
     movesDiv.textContent = moves;
     var list = document.querySelector('.stars');
     list.innerHTML = "";
-    list.appendChild(cloneStar);
-    list.appendChild(cloneStar1);
-    list.appendChild(cloneStar2);
+    cloneStar.forEach(function (el) {
+        list.appendChild(el);
+    });
+    removedStar = 2;
 }
 function checkCard() {
     this.style.background = 'url("./img/' + this.dataset.img + '.jpg")';
@@ -221,24 +221,24 @@ function clearsmt() {
     clearInterval(timer);
 }
 function changeTime() {
-    removeStar();
     i++;
     time.textContent = i;
+    removeStar();
 }
 
 function removeStar() {
     stars = document.querySelectorAll('.stars li');
-    if ((moves === 18 || i === 3) && removedStar === 0) {
-        stars[removedStar].parentNode.removeChild(stars[removedStar]);
-        removedStar++;
+    if ((moves === 18 || i === 4) && removedStar === 2) {
+        stars[0].parentNode.removeChild(stars[0]);
+        removedStar--;
     }
-    if ((moves === 20 || i === 5) && removedStar === 1) {
-        stars[removedStar].parentNode.removeChild(stars[removedStar]);
-        removedStar++;
+    if ((moves === 20 || i === 6) && removedStar === 1) {
+        stars[0].parentNode.removeChild(stars[0]);
+        removedStar--;
     }
-    if ((moves === 25 || i === 20) && removedStar === 2) {
-        stars[removedStar].parentNode.removeChild(stars[removedStar]);
-        removedStar++;
+    if ((moves === 25 || i === 13) && removedStar === 0) {
+        stars[0].parentNode.removeChild(stars[0]);
+        removedStar--;
     }
 }
 
