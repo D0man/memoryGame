@@ -228,15 +228,15 @@ function changeTime() {
 
 function removeStar() {
     stars = document.querySelectorAll('.stars li');
-    if ((moves === 18 || i === 4) && removedStar === 2) {
+    if ((moves === 18 || i === 41) && removedStar === 2) {
         stars[0].parentNode.removeChild(stars[0]);
         removedStar--;
     }
-    if ((moves === 20 || i === 6) && removedStar === 1) {
+    if ((moves === 20 || i === 51) && removedStar === 1) {
         stars[0].parentNode.removeChild(stars[0]);
         removedStar--;
     }
-    if ((moves === 25 || i === 13) && removedStar === 0) {
+    if ((moves === 25 || i === 120) && removedStar === 0) {
         stars[0].parentNode.removeChild(stars[0]);
         removedStar--;
     }
