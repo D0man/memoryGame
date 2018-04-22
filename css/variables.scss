@@ -1,0 +1,10 @@
+$img-margin: 3px;
+$img-width: 258px;
+$img-height: 145px;
+$img-md-width: 233px;
+$img-md-height:131px;
+$break: ($img-width*4)+(8*$img-margin);
+$medium-break:($img-md-width*4)+(8*$img-margin);
+$small-break: $break/3+24px;
+$img-small-width: $img-width/3;
+$img-small-height: $img-height/3;

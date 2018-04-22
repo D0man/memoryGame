@@ -74,19 +74,36 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 __webpack_require__(1);
 
-/*
- * Create a list that holds all of your cards
- */
+var startValue = 0;
+var endValue = 1;
+
 var cardList = ['sasha', 'riley', 'nicole', 'miamalkova', 'mia', 'madison', 'lana', 'johnny'];
 cardList = cardList.concat(cardList);
-var counter = 0;
-var points = 0;
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+var moves = void 0,
+    matched = void 0,
+    star = void 0,
+    i = void 0,
+    removedStar = void 0;
+
+var cards = document.querySelectorAll('.card');
+var restart = document.querySelector('.restart');
+var stars = document.querySelectorAll('.stars li');
+var scorePanel = document.querySelector('.score-panel');
+var time = document.querySelector('.time');
+var movesDiv = document.querySelector('.moves');
+var startButton = document.querySelector('#startButton');
+restart.addEventListener('click', startGame);
+startButton.addEventListener('click', function start() {
+    var _this = this;
+
+    this.removeEventListener('click', start);
+    this.parentElement.classList.add('out');
+    setTimeout(function () {
+        _this.parentElement.classList.add('hidden');
+    }, 2000);
+
+    startGame();
+});
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -104,43 +121,59 @@ function shuffle(array) {
 
     return array;
 }
-var newCardList = shuffle(cardList);
-var cards = document.querySelectorAll('.card');
-// cards.forEach(function letnameitlater(card,index){
-//     card.setAttribute("data-img", newCardList[index]);
-//     card.style.background="#fff";
-//     card.addEventListener('click', checkCard)
-
-// });
-var _iteratorNormalCompletion = true;
-var _didIteratorError = false;
-var _iteratorError = undefined;
-
-try {
-    for (var _iterator = cards.entries()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var _step$value = _slicedToArray(_step.value, 2),
-            index = _step$value[0],
-            card = _step$value[1];
-
-        card.setAttribute("data-img", newCardList[index]);
-        card.style.background = "#fff";
-        card.addEventListener('click', checkCard);
+var timer = 0;
+function startGame() {
+    reset();
+    clearsmt();
+    set();
+    if (document.querySelectorAll('.end-game').length) {
+        var modal = document.querySelectorAll('.end-game');
+        modal[modal.length - 1].style.display = "none";
     }
-} catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-} finally {
+    var newCardList = shuffle(cardList);
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
     try {
-        if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
+        for (var _iterator = cards.entries()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var _step$value = _slicedToArray(_step.value, 2),
+                index = _step$value[0],
+                card = _step$value[1];
+
+            card.setAttribute("data-img", newCardList[index]);
+            card.style.background = "#fff";
+            card.addEventListener('click', checkCard);
         }
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
     } finally {
-        if (_didIteratorError) {
-            throw _iteratorError;
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+            }
+        } finally {
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
         }
     }
 }
 
+function reset() {
+    var cloneStar = stars[0].cloneNode(true);
+    var cloneStar1 = stars[0].cloneNode(true);
+    var cloneStar2 = stars[0].cloneNode(true);
+    moves = matched = star = i = removedStar = startValue;
+    time.textContent = i;
+    movesDiv.textContent = moves;
+    var list = document.querySelector('.stars');
+    list.innerHTML = "";
+    list.appendChild(cloneStar);
+    list.appendChild(cloneStar1);
+    list.appendChild(cloneStar2);
+}
 function checkCard() {
     this.style.background = 'url("./img/' + this.dataset.img + '.jpg")';
     this.classList.add('matching');
@@ -148,45 +181,66 @@ function checkCard() {
     if (matchedCard.length == 2) {
         var blocker = document.createElement("div");
         blocker.classList.add("block-click");
-        console.log(blocker);
         document.body.appendChild(blocker);
         matchedCard[0].classList.remove('matching');
         matchedCard[1].classList.remove('matching');
-        console.log('matching...');
+        moves++;
+        movesDiv.textContent = moves;
         if (matchedCard[0].dataset.img === matchedCard[1].dataset.img) {
-            points++;
+            matched++;
             matchedCard[0].removeEventListener('click', checkCard);
             matchedCard[1].removeEventListener('click', checkCard);
             document.body.removeChild(blocker);
-            if (points === 8) endGame();
+            if (matched === endValue) endGame();
         } else {
             setTimeout(function () {
                 matchedCard[0].style.background = "#fff";
                 matchedCard[1].style.background = "#fff";
                 document.body.removeChild(blocker);
-            }, 1500);
+            }, 500);
         }
-        counter++;
-        document.querySelector('.moves').textContent = counter;
+        removeStar();
     }
 }
+
 function endGame() {
-    var endGame = document.createElement("div");
-    endGame.classList.add("block-click", "end-game");
-    var text = document.createTextNode('Koniec: ' + points + ' points');
-    endGame.appendChild(text);
-    document.body.appendChild(endGame);
+    var endGameModal = document.createElement("div");
+    var scorePanelClone = scorePanel.cloneNode(true);
+    clearsmt();
+    endGameModal.classList.add("block-click", "end-game");
+    var text = document.createTextNode('Score:');
+    endGameModal.appendChild(text);
+    endGameModal.appendChild(scorePanelClone);
+    document.body.appendChild(endGameModal);
+    endGameModal.querySelector('.restart').addEventListener('click', startGame);
 }
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+function set() {
+    timer = setInterval(changeTime, 1000);
+}
+function clearsmt() {
+    clearInterval(timer);
+}
+function changeTime() {
+    removeStar();
+    i++;
+    time.textContent = i;
+}
+
+function removeStar() {
+    stars = document.querySelectorAll('.stars li');
+    if ((moves === 18 || i === 3) && removedStar === 0) {
+        stars[removedStar].parentNode.removeChild(stars[removedStar]);
+        removedStar++;
+    }
+    if ((moves === 20 || i === 5) && removedStar === 1) {
+        stars[removedStar].parentNode.removeChild(stars[removedStar]);
+        removedStar++;
+    }
+    if ((moves === 25 || i === 20) && removedStar === 2) {
+        stars[removedStar].parentNode.removeChild(stars[removedStar]);
+        removedStar++;
+    }
+}
 
 /***/ }),
 /* 1 */

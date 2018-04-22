@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const styleLintPlugin = require('stylelint-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 require('es6-promise').polyfill();
 
@@ -15,6 +16,7 @@ module.exports = {
   watch: true,
   plugins: [
     new ExtractTextPlugin('/css/main.css'),
+    // new UglifyJsPlugin()
   ],
 
   module: {
@@ -34,6 +36,10 @@ module.exports = {
             loader: 'url-loader?limit: 8192&name=img/[name].[hash].[ext]',
           }
         ]
+      },{
+        test: /\.(woff2?|ttf|otf|eot|svg)$/,
+        exclude: /node_modules/,
+        loader: 'file-loader?name=font/[name].[hash].[ext]',
       },
       {
         test: /\.(css|scss)$/,

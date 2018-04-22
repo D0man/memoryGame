@@ -1,17 +1,28 @@
-import '../css/app.scss'
-/*
- * Create a list that holds all of your cards
- */
-let cardList =['sasha','riley','nicole','miamalkova','mia','madison','lana','johnny']
+import '../css/app.scss';
+
+const startValue = 0;
+const endValue = 1;
+
+let cardList = ['sasha','riley','nicole','miamalkova','mia','madison','lana','johnny'];
 cardList = cardList.concat(cardList);
-let counter = 0;
-let points = 0;
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+let moves, matched, star, i, removedStar;
+
+
+const cards = document.querySelectorAll('.card');
+const restart = document.querySelector('.restart');
+let stars = document.querySelectorAll('.stars li');
+const scorePanel = document.querySelector('.score-panel');
+const time = document.querySelector('.time');
+const movesDiv = document.querySelector('.moves');
+const startButton = document.querySelector('#startButton');
+restart.addEventListener('click', startGame);
+startButton.addEventListener('click',function start(){
+    this.removeEventListener('click',start);
+    this.parentElement.classList.add('out');
+    setTimeout(()=>{this.parentElement.classList.add('hidden');}, 2000)
+    
+    startGame();
+})
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -27,64 +38,106 @@ function shuffle(array) {
 
     return array;
 }
-const newCardList = shuffle(cardList);
-const cards = document.querySelectorAll('.card');
-// cards.forEach(function letnameitlater(card,index){
-//     card.setAttribute("data-img", newCardList[index]);
-//     card.style.background="#fff";
-//     card.addEventListener('click', checkCard)
-    
-// });
-for ( const [index,card] of cards.entries()){
-    card.setAttribute("data-img", newCardList[index]);
-    card.style.background = "#fff";
-    card.addEventListener('click', checkCard);
+let timer= 0
+function startGame(){
+    reset()
+    clearsmt();
+    set();
+    if (document.querySelectorAll('.end-game').length){
+        let modal = document.querySelectorAll('.end-game');
+        modal[modal.length-1].style.display="none";
+    }
+    const newCardList = shuffle(cardList);
+    for ( const [index,card] of cards.entries()){
+        card.setAttribute("data-img", newCardList[index]);
+        card.style.background = "#fff";
+        card.addEventListener('click', checkCard);
+    }
 }
 
+function reset(){
+    const cloneStar = stars[0].cloneNode(true);
+    const cloneStar1 = stars[0].cloneNode(true);
+    const cloneStar2 = stars[0].cloneNode(true);
+    moves = matched = star = i = removedStar = startValue;
+   time.textContent = i;
+   movesDiv.textContent = moves;
+   const list = document.querySelector('.stars');
+   list.innerHTML="";
+   list.appendChild(cloneStar);
+   list.appendChild(cloneStar1);
+   list.appendChild(cloneStar2);
+  
+  
+}
 function checkCard(){
     this.style.background=`url("./img/${this.dataset.img}.jpg")`;
     this.classList.add('matching');
     let matchedCard = document.querySelectorAll('.matching');
     if(matchedCard.length==2){
         var blocker = document.createElement("div");        
-        blocker.classList.add("block-click");
-        console.log(blocker);                               
+        blocker.classList.add("block-click");                            
         document.body.appendChild(blocker);              
         matchedCard[0].classList.remove('matching');
         matchedCard[1].classList.remove('matching');
-        console.log('matching...')
+        moves++; 
+        movesDiv.textContent=moves;
         if(matchedCard[0].dataset.img===matchedCard[1].dataset.img){
-            points++;
+            matched++;
             matchedCard[0].removeEventListener('click',checkCard);
             matchedCard[1].removeEventListener('click',checkCard);
             document.body.removeChild(blocker);
-            if (points === 8) endGame();
+            if (matched === endValue) endGame();
         }
         else{
             setTimeout(()=>{
                 matchedCard[0].style.background="#fff";
                 matchedCard[1].style.background="#fff";
                 document.body.removeChild(blocker);
-            },1500)
+            },500)
         }
-        counter++;
-        document.querySelector('.moves').textContent=counter;
+        removeStar();
+       
     }   
 }
+
 function endGame(){
-    var endGame = document.createElement("div");        
-    endGame.classList.add("block-click", "end-game");
-    var text = document.createTextNode(`Koniec: ${points} points`);
-    endGame.appendChild(text) 
-    document.body.appendChild(endGame);                      
+    const endGameModal = document.createElement("div");
+    const scorePanelClone = scorePanel.cloneNode(true);
+    clearsmt();  
+    endGameModal.classList.add("block-click", "end-game");
+    const text = document.createTextNode('Score:');
+    endGameModal.appendChild(text);
+    endGameModal.appendChild(scorePanelClone); 
+    document.body.appendChild(endGameModal);
+    endGameModal.querySelector('.restart')
+    .addEventListener('click', startGame);                      
 }
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+function set(){
+    timer = setInterval(changeTime, 1000);
+}
+function clearsmt(){
+    clearInterval(timer);
+}
+function changeTime(){
+        removeStar();
+        i++;
+        time.textContent=i;
+    }
+
+function removeStar(){
+    stars = document.querySelectorAll('.stars li');
+        if( (moves === 18 || i === 3) && removedStar === 0){
+            stars[removedStar].parentNode.removeChild(stars[removedStar]);
+            removedStar++; 
+        
+        }
+        if( (moves ===20 || i === 5) && removedStar === 1){
+            stars[removedStar].parentNode.removeChild(stars[removedStar]); 
+            removedStar++;  
+        }
+        if( (moves ===25 || i === 20) && removedStar === 2){
+            stars[removedStar].parentNode.removeChild(stars[removedStar]);
+            removedStar++;   
+        } 
+}

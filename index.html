@@ -1,103 +1,61 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matching Game</title>
-    <meta name="description" content="">
-    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+    <meta name="description" content="memory game project on udacity nanodegree course">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="apple-touch-icon" href="img/icon.png">
+    
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-
-    <div class="container">
-        <header>
-            <h1 class="page__heading">Matching<span class="page__heading--orange">Game</span></h1>
-        </header>
-
-        <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        	</ul>
-
-        	<span class="moves">3</span> Moves
-
-            <div class="restart">
-        		<i class="fa fa-repeat"></i>
-        	</div>
-        </section>
-
-        <ul class="deck">
-            <li class="card">
-                <i class="fa fa-diamond"></i>
-                <!-- <img src="./img/johnny.jpg" alt="he isn't jon snow he is johny sins he know things"> -->
-            </li>
-            <li class="card">
-                <i class="fa fa-paper-plane-o"></i>
-                <!-- <img src="./img/sasha.jpg" alt="grey"> -->
-            </li>
-            <li class="card">
-                <i class="fa fa-anchor"></i>
-                <!-- <img src="./img/riley.jpg" alt="some random chick"> -->
-            </li>
-            <li class="card">
-                <i class="fa fa-bolt"></i>
-                <!-- <img src="./img/nicole.jpg" alt="some random chick"> -->
-            </li>
-            <li class="card">
-                <i class="fa fa-cube"></i>
-                <!-- <img src="./img/madison.jpg" alt="some random chick"> -->
-            </li>
-            <li class="card">
-                <i class="fa fa-anchor"></i>
-                <!-- <img src="./img/riley.jpg" alt="some random chick"> -->
-            </li>
-            <li class="card">
-                <i class="fa fa-leaf"></i>
-                <!-- <img src="./img/lana.jpg" alt="some random chick"> -->
-            </li>
-            <li class="card">
-                <i class="fa fa-bicycle"></i>
-                <!-- <img src="./img/mia.jpg" alt="some random chick"> -->
-            </li>
-            <li class="card">
-                <i class="fa fa-diamond"></i>
-                <!-- <img src="./img/johnny.jpg" alt="he isn't jon snow he is johny sins he know things"> -->
-            </li>
-            <li class="card">
-                <i class="fa fa-bomb"></i>
-                <!-- <img src="./img/miamalkova.jpg" alt="some random chick"> -->
-            </li>
-            <li class="card">
-                <i class="fa fa-leaf"></i>
-                <!-- <img src="./img/lana.jpg" alt="some random chick"> -->
-            </li>
-            <li class="card">
-                <i class="fa fa-bomb"></i>
-                <!-- <img src="./img/miamalkova.jpg" alt="some random chick"> -->
-            </li>
-            <li class="card open show">
-                <i class="fa fa-bolt"></i>
-                <!-- <img src="./img/nicole.jpg" alt="some random chick"> -->
-            </li>
-            <li class="card">
-                <i class="fa fa-bicycle"></i>
-                <!-- <img src="./img/mia.jpg" alt="some random chick"> -->
-            </li>
-            <li class="card">
-                <i class="fa fa-paper-plane-o"></i>
-                <!-- <img src="./img/sasha.jpg" alt="grey"> -->
-            </li>
-            <li class="card">
-                <i class="fa fa-cube"></i>
-                <!-- <img src="./img/madison.jpg" alt="some random chick"> -->
-            </li>
+    <header class="page__heading">
+        <div class="container">
+            <h1>Matching<span class="page__heading--orange">Game</span></h1>
+        </div>
+    </header>
+    <section class="star-menu">
+        <h2>Matching<span class="page__heading--orange">Game</span></h2>   
+        <button class="start-button" id="startButton">StarGame</button>
+    </section>
+    <section class="score-panel">
+        <ul class="stars">
+            <li><span class="icon-star"></span></li>
+            <li><span class="icon-star"></span></li>
+            <li><span class="icon-star"></span></li>
         </ul>
-    </div>
 
+        <div><span class="moves">0</span>&nbsp;Moves</div>
+        <div>Time:&nbsp;<span class="time">0</span></div>
+        <button class="restart">
+            <span class="icon-cw"></span>
+        </div>
+    </section>
+    <section>
+        <ul class="deck">
+            <li class="card"></li>
+            <li class="card"></li>
+            <li class="card"></li>
+            <li class="card"></li>
+            <li class="card"></li>
+            <li class="card"></li>
+            <li class="card"></li>
+            <li class="card"></li>
+            <li class="card"></li>
+            <li class="card"></li>
+            <li class="card"></li>
+            <li class="card"></li>
+            <li class="card"></li>
+            <li class="card"></li>
+            <li class="card"></li>
+            <li class="card"></li>
+        </ul>
+    </section>
     <script src="js/main.js"></script>
 </body>
 </html>

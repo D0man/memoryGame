@@ -1,8 +1,38 @@
+
 body{
     background: #000;
     color: #fff;
     font-family: Arial,Helvetica,sans-serif;
     font-size: 16px;
+}
+.container{
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
+}
+.star-menu{
+    top: 55px;
+    left:0px;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index:10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition:all 1s ease-out;
+
+    .start-button{
+        margin:20px auto;
+    }
+}
+.out{
+    left:180%; 
+}
+.hidden{
+    display:none;
 }
 .page__heading{
     font-size:2em;
@@ -23,16 +53,32 @@ body{
     flex-wrap: wrap;
     justify-content: center;
     width:100%;
-    max-width: (258*4px)+24px; 
     padding:10px;
     margin:0 auto;
+    @media screen and (min-width: $small-break){
+        max-width: $small-break; 
+        }
+    @media screen and (min-width: $medium-break){
+        max-width: $medium-break; 
+        }
+    @media screen and (min-width: $break){
+        max-width: $break; 
+        }
     .card{
-        height: 145px;
-        width: 258px;
+        height: $img-small-height;
+        width: $img-small-width; 
         cursor: pointer;
         background:white;
         margin:3px;
         transition: 1.5s cubic-bezier(0.44, -0.29, 0, 0.34);
+        @media screen and (min-width: $medium-break) {
+           width:233px;
+           height: 131px;
+        }
+        @media screen and (min-width: $break){
+        height: 145px;
+        width: 258px;   
+        }
     }
 }
 .score-panel{
@@ -42,27 +88,59 @@ body{
     justify-content: space-evenly;
     width: 300px;
     text-shadow: 0 0 black;
-    .stars{
-        display:flex;
-    }
 }
-.fa{
-    display:none;
+.stars{
+    display:flex;
 }
+
 .block-click{
     top:0;
-    position: absolute;
+    position: fixed;
     background: transparent;
     width: 100%;
     height: 100%;
+}
+.restart{
+    box-sizing: border-box;
+    position: relative;
+    cursor: pointer;
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    z-index:5;
+    &:hover,&:focus{
+        outline:1px solid black;
+    }
 }
 .end-game{
     background: rgba(255,255,255,0.5);
     display: flex;
     justify-content: center;
-    font-size:2.8em;
+    align-items: center;
+    font-size:2.4em;
     font-weight: 700;
     flex-direction: column;
     text-align: center;
-    color: #FE980E;
+    color: #000000;
+    &::after{
+            z-index: -1;
+            position: absolute;
+            display: flex;
+            content: '';
+            width: 320px;
+            height: 240px;
+            background: red;
+            border-radius: 10px;
+            border: 5px solid 1A1A1A;
+            background: #FE980E;;
+    }
+    .score-panel{
+        flex-direction: column;
+        align-items: center;
+    }
 }
