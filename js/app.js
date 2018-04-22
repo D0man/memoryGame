@@ -1,7 +1,7 @@
 import '../css/app.scss';
 
 const startValue = 0;
-const endValue = 1;
+const endValue = 8;
 
 let cardList = ['sasha','riley','nicole','miamalkova','mia','madison','lana','johnny'];
 cardList = cardList.concat(cardList);
@@ -127,16 +127,16 @@ function changeTime(){
 
 function removeStar(){
     stars = document.querySelectorAll('.stars li');
-        if( (moves === 18 || i === 3) && removedStar === 0){
+        if( (moves === 18 || i === 30) && removedStar === 0){
             stars[removedStar].parentNode.removeChild(stars[removedStar]);
             removedStar++; 
         
         }
-        if( (moves ===20 || i === 5) && removedStar === 1){
+        if( (moves ===20 || i === 50) && removedStar === 1){
             stars[removedStar].parentNode.removeChild(stars[removedStar]); 
             removedStar++;  
         }
-        if( (moves ===25 || i === 20) && removedStar === 2){
+        if( (moves ===25 || i === 120) && removedStar === 2){
             stars[removedStar].parentNode.removeChild(stars[removedStar]);
             removedStar++;   
         } 
