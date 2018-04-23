@@ -4,6 +4,7 @@ body{
     color: #fff;
     font-family: Arial,Helvetica,sans-serif;
     font-size: 16px;
+    overflow-x: hidden;
 }
 .container{
     width:100%;
@@ -38,9 +39,9 @@ body{
     font-size:2em;
     font-weight: bolder;
     background:#1A1A1A;
-    padding:10px;
+    padding: 10px 0;
     border-bottom: 1px solid #242424;
-
+    width: 100%;
     &--orange{
         background:#FE980E;
         color:#000;
@@ -49,28 +50,40 @@ body{
     }
 }
 .deck{
+    box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     width:100%;
     padding:10px;
     margin:0 auto;
-    @media screen and (min-width: $small-break){
-        max-width: $small-break; 
+    @media screen and (min-width: $very-small-break){
+        max-width: $very-small-break; 
         }
+    @media screen and (min-width: $small-break) {
+        max-width: $small-break;
+        box-sizing: content-box;
+    }
     @media screen and (min-width: $medium-break){
+        box-sizing: content-box;
         max-width: $medium-break; 
         }
     @media screen and (min-width: $break){
+        box-sizing: content-box;
         max-width: $break; 
         }
     .card{
-        height: $img-small-height;
-        width: $img-small-width; 
+        height: $img-very-small-height;
+        width: $img-very-small-width; 
         cursor: pointer;
         background:white;
+        background-size: contain;
         margin:3px;
         transition: 1.5s cubic-bezier(0.44, -0.29, 0, 0.34);
+        @media screen and (min-width: $small-break) {
+            width: calc(233/2px);
+            height: calc(131/2px);
+         }
         @media screen and (min-width: $medium-break) {
            width:233px;
            height: 131px;

@@ -16,7 +16,7 @@ module.exports = {
   watch: true,
   plugins: [
     new ExtractTextPlugin('/css/main.css'),
-    // new UglifyJsPlugin()
+    new UglifyJsPlugin()
   ],
 
   module: {
