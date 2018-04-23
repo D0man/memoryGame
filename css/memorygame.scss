@@ -81,8 +81,8 @@ body{
         margin:3px;
         transition: 1.5s cubic-bezier(0.44, -0.29, 0, 0.34);
         @media screen and (min-width: $small-break) {
-            width: calc(233/2px);
-            height: calc(131/2px);
+            width: 116.5px;
+            height: 65.5px;
          }
         @media screen and (min-width: $medium-break) {
            width:233px;

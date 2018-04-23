@@ -1,20 +1,20 @@
 # Memory Game Project
-
+Simple project as part of Udacity Nanodegree course. 
+For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
 ## Table of Contents
 
 * [Instructions](#instructions)
-* [Contributing](#contributing)
+* [About](#about)
 
 ## Instructions
+You need to find to "card" that are matched. I'm pretty sure some of the match and you even watch them matching but to gain points you need to find two identical card.
+ 3 Star - best score less than 17 moves and less than 40 seconds
+ 1 star - worst score more than 25 moves and less than 120 seconds.
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+## About
 
-To get started, open `js/app.js` and start building out the app's functionality
+Design was inspired by some random web page, I don't exactly remember name, actually i don't think i ever was on that page. Photos are totally random from google i don't know this people;
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
 
-## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
