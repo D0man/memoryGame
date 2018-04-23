@@ -59,6 +59,7 @@ function startGame(){
 }
 
 function reset(){
+    cards.forEach((el)=>{el.style.backgroundImage="";});
     moves = matched = star = i = startValue;
     time.textContent = i;
     movesDiv.textContent = moves;
