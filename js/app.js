@@ -1,4 +1,4 @@
-import '../css/app.scss';
+// import '../css/app.scss';
 
 const startValue = 0;
 const endValue = 8;
@@ -44,7 +44,7 @@ function shuffle(array) {
 
 function startGame(){
     reset()
-    clearsmt();
+    clearTimer();
     set();
     if (document.querySelectorAll('.end-game').length){
         let modal = document.querySelectorAll('.end-game');
@@ -106,7 +106,7 @@ function checkCard(){
 function endGame(){
     const endGameModal = document.createElement("div");
     const scorePanelClone = scorePanel.cloneNode(true);
-    clearsmt();  
+    clearTimer();  
     endGameModal.classList.add("block-click", "end-game");
     const text = document.createTextNode('Score:');
     endGameModal.appendChild(text);
@@ -120,7 +120,7 @@ function set(){
     timer = setInterval(changeTime, 1000);
 }
 
-function clearsmt(){
+function cleaTimer(){
     clearInterval(timer);
 }
 
@@ -141,8 +141,9 @@ function removeStar(){
             stars[0].parentNode.removeChild(stars[0]); 
             removedStar--;  
         }
-        if( (moves === 24 || i === 120) && removedStar === 0){
-            stars[0].parentNode.removeChild(stars[0]);
-            removedStar--;   
-        } 
+        // if( (moves === 24 || i === 120) && removedStar === 0){
+        //     stars[0].parentNode.removeChild(stars[0]);
+        //     removedStar--;   
+        // } 
+        // i will use 3 star in my final project but for now to mmet requriments
 }
