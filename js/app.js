@@ -45,7 +45,7 @@ function shuffle(array) {
 function startGame(){
     reset()
     clearTimer();
-    set();
+    setTime();
     if (document.querySelectorAll('.end-game').length){
         let modal = document.querySelectorAll('.end-game');
         modal[modal.length-1].style.display="none";
@@ -116,11 +116,11 @@ function endGame(){
     .addEventListener('click', startGame);                      
 }
 
-function set(){
+function setTime(){
     timer = setInterval(changeTime, 1000);
 }
 
-function cleaTimer(){
+function clearTimer(){
     clearInterval(timer);
 }
 
