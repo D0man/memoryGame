@@ -41,7 +41,7 @@ function shuffle(array) {
     return array;
 }
 
-
+//function that start Game
 function startGame(){
     reset()
     clearTimer();
@@ -57,7 +57,7 @@ function startGame(){
         card.addEventListener('click', checkCard);
     }
 }
-
+//function that reset
 function reset(){
     cards.forEach((el)=>{el.style.backgroundImage="";});
     moves = matched = star = i = startValue;
@@ -71,7 +71,7 @@ function reset(){
     removedStar = 2;
   
 }
-
+//function checking card
 function checkCard(){
     this.style.backgroundImage=`url("./img/${this.dataset.img}.jpg")`;
     this.classList.add('matching');
@@ -102,7 +102,7 @@ function checkCard(){
        
     }   
 }
-
+//function that shows end Game modal
 function endGame(){
     const endGameModal = document.createElement("div");
     const scorePanelClone = scorePanel.cloneNode(true);
@@ -115,21 +115,21 @@ function endGame(){
     endGameModal.querySelector('.restart')
     .addEventListener('click', startGame);                      
 }
-
+// function that sets time 
 function setTime(){
     timer = setInterval(changeTime, 1000);
 }
-
+//function that clears timer
 function clearTimer(){
     clearInterval(timer);
 }
-
+//function that changes time that takes to resolve game
 function changeTime(){
         i++;
         time.textContent=i;
         removeStar();
     }
-
+//functiont that removes star
 function removeStar(){
     stars = document.querySelectorAll('.stars li');
         if( (moves === 17 || i === 41) && removedStar === 2){
